@@ -1,0 +1,6 @@
+fastapi-users[sqlalchemy,oauth]~=12.1.3
+fastapi[all]~=0.109.2
+pythainlp~=5.0.1
+pandas~=2.2.0
+numpy~=1.26.4
+SQLAlchemy~=2.0.27
