@@ -4,7 +4,7 @@
 
 ### PIP
 
-```docker
+```dockerfile
 FROM python:3.12-slim
 
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
@@ -15,7 +15,7 @@ RUN pip install -r /requirements.txt
 CMD ["pip", "freeze"]
 ```
 
-```
+```bash
 docker build --no-cache -t test:pip -f Dockerfile.pip .
 ```
 
@@ -23,7 +23,7 @@ docker build --no-cache -t test:pip -f Dockerfile.pip .
 
 ### UV
 
-```docker
+```dockerfile
 FROM python:3.12-slim
 
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
@@ -35,7 +35,7 @@ RUN pip install uv \
 CMD ["uv", "pip", "list", "--format" ,"freeze"]
 ```
 
-```
+```bash
 docker build --no-cache -t test:uv -f Dockerfile.uv .
 ```
 
