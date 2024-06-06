@@ -4,7 +4,7 @@
 
 ### PIP
 
-```python
+```docker
 FROM python:3.12-slim
 
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
@@ -16,29 +16,27 @@ CMD ["pip", "freeze"]
 ```
 
 ```
-docker build --no-cache -t test:pip -f Dockerfile.pip
+docker build --no-cache -t test:pip -f Dockerfile.pip .
 ```
 
 ![pip build](pip.jpg)
 
 ### UV
 
-```python
+```docker
 FROM python:3.12-slim
 
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
 
-ENV VIRTUAL_ENV /usr/local
-
 COPY requirements.txt /requirements.txt
 RUN pip install uv \
-  && uv pip install -r /requirements.txt
+  && uv pip install --system -r /requirements.txt
 
-CMD ["uv", "pip", "freeze"]
+CMD ["uv", "pip", "list", "--format" ,"freeze"]
 ```
 
 ```
-docker build --no-cache -t test:uv -f Dockerfile.uv
+docker build --no-cache -t test:uv -f Dockerfile.uv .
 ```
 
 ![uv build](uv.jpg)
@@ -47,16 +45,16 @@ docker build --no-cache -t test:uv -f Dockerfile.uv
 
 ### Time
 
-| Type | Build | Overall |
-| ---- | ----- | ------- |
-| pip  | 35.6s | 36s     |
-| uv   | 25.7s | 26s     |
+| Type | Build | Stage3/3 |
+| ---- | ----- | -------- |
+| pip  | 31s   | 15.4s    |
+| uv   | 18s   | 4.2s     |
 
 ### Size
 
 | Type | Size  |
 | ---- | ----- |
-| pip  | 802MB |
-| uv   | 648MB |
+| pip  | 813MB |
+| uv   | 655MB |
 
 ![image size](image-size.jpg)
