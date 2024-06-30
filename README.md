@@ -24,13 +24,14 @@ docker build --no-cache -t test:pip -f Dockerfile.pip .
 ### UV
 
 ```dockerfile
+FROM ghcr.io/astral-sh/uv:latest as uv
 FROM python:3.12-slim
 
+COPY --from=uv /uv /bin/uv
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
 
 COPY requirements.txt /requirements.txt
-RUN pip install uv \
-  && uv pip install --system -r /requirements.txt
+RUN uv pip install --system -r /requirements.txt
 
 CMD ["uv", "pip", "list", "--format" ,"freeze"]
 ```
